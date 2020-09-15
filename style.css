@@ -5,6 +5,7 @@ body {
     height: 100vh;
     background-color: #5d5979;
     flex-wrap: wrap;
+    margin: 0;
 }
 
 .btn-start {
@@ -101,4 +102,16 @@ body {
 .circle_green{
     background-color: #01a002;
     border: #003002;
+}
+
+.box_1.light_left {
+    background-color: #2387e8;
+}
+
+.light_right {
+    background-color: #2387e8;
+    border-top: 20px solid#1f3a5e;
+    border-left: 20px solid #285282;
+    border-right: 20px solid #285282;
+    border-bottom: 20px solid #1f3a5e;
 }

@@ -1,4 +1,5 @@
 const btnEmpezar = document.querySelector('.btn-start');
+const ULTIMO_NIVEL = 5;
 
 const ALeft = document.querySelector('.A-L');
 const BLeft = document.querySelector('.B-L');
@@ -39,9 +40,15 @@ class Juego {
     }
 
     inicializar() {
-        this.elegirBoton = this.elegirBoton.bind(this)
-        btnEmpezar.classList.add('hide');
+        this.inicializar = this.inicializar.bind(this);
+        this.siguienteNivel = this.siguienteNivel.bind(this);
+        this.elegirBoton = this.elegirBoton.bind(this);
+        this.toogleBtnEmpezar();
         this.nivel = 1;
+        this.circleLeft();
+        this.circleright();
+        this.eliminarCircleR();
+        this.eliminarCircleL();
         this.botonesIzquierda = {
             ALeft,
             BLeft,
@@ -64,6 +71,22 @@ class Juego {
             HRight,
             IRight
         }
+
+        this.circulosDerecha = {
+            firstright,
+            secondright,
+            thirdright,
+            fourthright,
+            fifthright
+        }
+    }
+
+    toogleBtnEmpezar() {
+        if (btnEmpezar.classList.contains('hide')) {
+            btnEmpezar.classList.remove('hide')
+        } else {
+            btnEmpezar.classList.add('hide')
+        }
     }
 
     generarSecuencia() {
@@ -73,12 +96,13 @@ class Juego {
     }
 
     siguienteNivel() {
+        this.subnivel = 0;
         this.iluminarSecuencia()
         this.agregarEventosClick()
     }
 
-    transformarBotonANumero(boton) {
-        switch (boton) {
+    transformarNumeroABoton(numero) {
+        switch (numero) {
             case 0:
                 return 'ALeft';
             case 1:
@@ -100,20 +124,52 @@ class Juego {
         }
     }
 
-    iluminarSecuencia() {
-        for (let i = 0; i < this.nivel; i++) {
-            const boton = this.transformarBotonANumero(this.secuencia[i]);
-            setTimeout(() => this.iluminarBoton(boton), 1000 * i);
+    transformarBotonANumero(boton) {
+        switch (boton) {
+            case 'ARight':
+                return 0;
+            case 'BRight':
+                return 1;
+            case 'CRight':
+                return 2;
+            case 'DRight':
+                return 3;
+            case 'ERight':
+                return 4;
+            case 'FRight':
+                return 5;
+            case 'GRight':
+                return 6;
+            case 'HRight':
+                return 7;
+            case 'IRight':
+                return 8;
         }
     }
 
-    iluminarBoton(boton) {
-        this.botonesIzquierda[boton].classList.add('light_left');
-        setTimeout(() => this.apagarBoton(boton), 350);
+    iluminarSecuencia() {
+        for (let i = 0; i < this.nivel; i++) {
+            const boton = this.transformarNumeroABoton(this.secuencia[i]);
+            setTimeout(() => this.iluminarBotonL(boton), 1000 * i);
+        }
     }
 
-    apagarBoton(boton) {
+    iluminarBotonL(boton) {
+        this.botonesIzquierda[boton].classList.add('light_left');
+        setTimeout(() => this.apagarBotonL(boton), 350);
+    }
+    
+    apagarBotonL(boton) {
         this.botonesIzquierda[boton].classList.remove('light_left');
+    }
+
+    iluminarBotonR(boton) {
+        this.botonesDerecha[boton].classList.add('light_right');
+        setTimeout(() => this.apagarBotonR(boton), 350);
+    }
+    
+    apagarBotonR(boton) {
+        this.botonesDerecha[boton].classList.remove('light_right');
     }
 
     agregarEventosClick() {
@@ -128,8 +184,135 @@ class Juego {
         this.botonesDerecha.IRight.addEventListener('click', this.elegirBoton);
     }
 
+    eliminarEventosClick() {
+        this.botonesDerecha.ARight.removeEventListener('click', this.elegirBoton);
+        this.botonesDerecha.BRight.removeEventListener('click', this.elegirBoton);
+        this.botonesDerecha.CRight.removeEventListener('click', this.elegirBoton);
+        this.botonesDerecha.DRight.removeEventListener('click', this.elegirBoton);
+        this.botonesDerecha.ERight.removeEventListener('click', this.elegirBoton);
+        this.botonesDerecha.FRight.removeEventListener('click', this.elegirBoton);
+        this.botonesDerecha.GRight.removeEventListener('click', this.elegirBoton);
+        this.botonesDerecha.HRight.removeEventListener('click', this.elegirBoton);
+        this.botonesDerecha.IRight.removeEventListener('click', this.elegirBoton);
+    }
+
     elegirBoton(ev) {
-        console.log(this)
+        const nombreBoton = ev.target.dataset.boton;
+        const numeroBoton = this.transformarBotonANumero(nombreBoton);
+        this.iluminarBotonR(nombreBoton);
+        if (numeroBoton === this.secuencia[this.subnivel]) {
+            this.subnivel++;
+            console.log('subnivel',this.subnivel)
+            this.circleright();
+            if (this.subnivel === this.nivel) {
+                this.nivel++;
+                console.log(this.nivel)
+                this.circleLeft();
+                this.eliminarEventosClick();
+                setTimeout(() => this.eliminarCircleR(), 500)
+                if (this.nivel === (ULTIMO_NIVEL + 1)){
+                    this.ganoElJuego();
+                    setTimeout(() => this.eliminarCircleL(), 350)
+                } else {
+                    setTimeout(this.siguienteNivel, 500);
+                }
+            } 
+
+        } else {
+            this.perdioElJuego()
+            setTimeout(() => this.eliminarCircleL(), 350)
+        }
+    }
+
+    circleLeft() {
+        if (this.nivel === 2){
+            firstleft.classList.add('circle_green');
+        }
+        
+        if (this.nivel === 3) {
+            secondleft.classList.add('circle_green');
+        }
+                
+        if (this.nivel === 4) {
+            thirdleft.classList.add('circle_green');
+        }
+
+        if (this.nivel === 5) {
+            fourthleft.classList.add('circle_green');
+        }
+
+        if (this.nivel === (ULTIMO_NIVEL+1)) {
+            fifthleft.classList.add('circle_green');
+        }       
+    }
+
+    circleright() {
+
+        if(this.subnivel === 1) {
+            firstright.classList.add('circle_green');
+        }
+
+        if(this.subnivel === 2) {
+            secondright.classList.add('circle_green');
+        }
+
+        if(this.subnivel === 3) {
+            thirdright.classList.add('circle_green');
+        }
+
+        if(this.subnivel === 4) {
+            fourthright.classList.add('circle_green');
+        }
+
+        if(this.subnivel === 5) {
+            fifthright.classList.add('circle_green');
+        }
+    }
+
+    eliminarCircleR() {
+        
+        if (firstright.classList.contains('circle_green')) {
+            firstright.classList.remove('circle_green');
+        }
+
+        if (secondright.classList.contains('circle_green')) {
+            secondright.classList.remove('circle_green');
+        }
+
+        if (thirdright.classList.contains('circle_green')) {
+            thirdright.classList.remove('circle_green');
+        }
+        
+        if (fourthright.classList.contains('circle_green')) {
+            fourthright.classList.remove('circle_green');
+        }
+
+        if (fifthright.classList.contains('circle_green')) {
+            fifthright.classList.remove('circle_green');
+        }
+
+    }
+
+    eliminarCircleL() {
+        firstleft.classList.remove('circle_green')
+        secondleft.classList.remove('circle_green')
+        thirdleft.classList.remove('circle_green')
+        fourthleft.classList.remove('circle_green')
+        fifthleft.classList.remove('circle_green')
+    }
+    
+
+    ganoElJuego() {
+        swal('Felicitaciones','Ganaste!', 'success')
+        .then(this.inicializar)
+    }
+
+    perdioElJuego() {
+        swal('Lo Siento','Perdiste', 'error')
+        .then(() => {
+            this.eliminarEventosClick()
+            this.inicializar()
+        })
     }
 }
 

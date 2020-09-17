@@ -101,14 +101,14 @@ body {
 
 .circle_green{
     background-color: #01a002;
-    border: #003002;
+    border: 5px solid #003002;
 }
 
 .box_1.light_left {
     background-color: #2387e8;
 }
 
-.light_right {
+.box_2.light_right {
     background-color: #2387e8;
     border-top: 20px solid#1f3a5e;
     border-left: 20px solid #285282;

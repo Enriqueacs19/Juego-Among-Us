@@ -40,15 +40,35 @@ class Juego {
     }
 
     inicializar() {
+
+        
         this.inicializar = this.inicializar.bind(this);
         this.siguienteNivel = this.siguienteNivel.bind(this);
         this.elegirBoton = this.elegirBoton.bind(this);
+        this.circulosIzquierda = {
+            firstleft,
+            secondleft,
+            thirdleft,
+            fourthleft,
+            fifthleft
+        }
+        console.log(this.circulosIzquierda)
+        this.circulosDerecha = {
+            firstright,
+            secondright,
+            thirdright,
+            fourthright,
+            fifthright
+        }
         this.toogleBtnEmpezar();
         this.nivel = 1;
         this.circleLeft();
         this.circleright();
         this.eliminarCircleR();
         this.eliminarCircleL();
+        
+        
+
         this.botonesIzquierda = {
             ALeft,
             BLeft,
@@ -72,13 +92,7 @@ class Juego {
             IRight
         }
 
-        this.circulosDerecha = {
-            firstright,
-            secondright,
-            thirdright,
-            fourthright,
-            fifthright
-        }
+
     }
 
     toogleBtnEmpezar() {
@@ -155,6 +169,7 @@ class Juego {
     }
 
     iluminarBotonL(boton) {
+        console.log()
         this.botonesIzquierda[boton].classList.add('light_left');
         setTimeout(() => this.apagarBotonL(boton), 350);
     }
@@ -293,12 +308,9 @@ class Juego {
 
     }
 
-    eliminarCircleL() {
-        firstleft.classList.remove('circle_green')
-        secondleft.classList.remove('circle_green')
-        thirdleft.classList.remove('circle_green')
-        fourthleft.classList.remove('circle_green')
-        fifthleft.classList.remove('circle_green')
+    eliminarCircleL(circulo) {
+        console.log(circulo);
+        this.circulosIzquierda[c].classList.remove('circle_green');
     }
     
 

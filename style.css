@@ -19,37 +19,45 @@ body {
 .container {
     display: flex;
     justify-content: space-between;
-    width: 1500px;
-    height: 820px;
+    max-width: 1500px;
+    max-height: 820px;
+    width: 100%;
+    height: 100%;
 }
 
 .window{
-    width: 600px;
-    height: 700px;
+    max-width: 600px;
+    max-height: 700px;
     background-color: #a3a1a3;
     border-top: 60px solid #cdcbcc;
     border-left: 60px solid #414041;
     border-right: 60px solid #414041;
     border-bottom: 60px solid #6f6d6f;
+    width: 100%;
+    height: 100%;
 }
 
 .circles {
-    width: 500px;
-    height: 50px;
+    max-width: 500px;
+    max-height: 50px;
     display: flex;
     justify-content: center;
     justify-content: space-between;
     margin-top: 40px;
     margin-left: 50px;
+    width: 100%;
+    height: 100%;
 }
 
 .circle {
-    width: 40px;
-    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
     background-color: #6a696a;
     border: 5px solid black;
     border-radius: 50%;
     box-shadow: 0px 10px 10px;
+    width: 100%;
+    height: 100%;
 }
 
 .panel_1 {
@@ -61,15 +69,19 @@ body {
     background-color: black;
     border: 8px solid #c7c6c7;
     border-radius: 20px;
-    width: 500px;
-    height: 500px;
+    max-width: 500px;
+    max-height: 500px;
+    width: 100%;
+    height: 100%;
 }
 
 .box_1 {
-    width: 150px;
-    height: 150px;
+    max-width: 150px;
+    max-height: 150px;
     background-color: black;
     margin: 8px;
+    width: 100%;
+    height: 100%;
 }
 
 .panel_2 {
@@ -78,20 +90,41 @@ body {
     position: relative;
     left: 40px;
     top: 55px;
-    width: 500px;
-    height: 500px;
+    max-width: 500px;
+    max-height: 500px;
+    width: 100%;
+    height: 100%;
 }
 
 .box_2 {
-    width: 110px;
-    height: 110px;
+    max-width: 110px;
+    max-height: 110px;
     background-color: #bebcbe;
     margin: 8px;
     border-top: 20px solid #626162;
     border-left: 20px solid #929193;
     border-right: 20px solid #929193;
     border-bottom: 20px solid #626162;
+    width: 100%;
+    height: 100%;
 }
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+    
+}
+
+@media screen and (max-width: 480px) {
+    
+}
+
+@media screen and (max-width: 320px) {
+    
+}
+
 
 /* For JS */
 

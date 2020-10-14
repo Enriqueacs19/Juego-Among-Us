@@ -21,10 +21,10 @@ class Juego {
             ...document.querySelectorAll('.circles.right .circle')
         ];
         this.botonesIzquierda = [
-            ...document.querySelectorAll('.box_1')
+            ...document.querySelectorAll('.box_left')
         ];
         this.botonesDerecha = [
-            ...document.querySelectorAll('.box_2')
+            ...document.querySelectorAll('.box_right')
         ];
     }
 
